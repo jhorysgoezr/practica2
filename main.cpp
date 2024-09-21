@@ -31,7 +31,26 @@ int main()
         switch(opcion){
         case 1:
         {
+            int valores[10]= {50000,20000,10000,5000,2000,1000,500,200,100,50};
+            int cantidad[10]={};
 
+            int cantidad_ing;
+            cout<<"Porfavor ingrese una cantidad de dinero"<<endl;
+            cin>> cantidad_ing;
+
+            for (int i=0; i<10; i++){
+                if (cantidad_ing >= valores[i]){
+                    cantidad[i]= cantidad_ing/ valores[i];
+                    cantidad_ing %= valores[i];
+                }
+            }
+                for (int i=0; i<10; i++){
+                    cout<<valores[i]<<": "<<cantidad[i]<<endl;
+                }
+
+                if (cantidad_ing>0){
+                    cout<<"faltante: "<< cantidad_ing<<endl;
+                }
         }
         break;
         case 2:{
