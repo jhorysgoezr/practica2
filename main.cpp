@@ -1,4 +1,5 @@
 #include <iostream>
+#include<cstdlib>
 
 using namespace std;
 
@@ -54,7 +55,31 @@ int main()
         }
         break;
         case 2:{
+            const int tamaño = 200;
+            char letras[tamaño];
 
+            srand(static_cast<unsigned int>(time(nullptr)));
+            for (int i=0; i<tamaño; i++){
+                letras[i] = 'A' + rand() % 26;
+            }
+
+            cout<<"Arreglo de letras ";
+            for (int i=0; i<tamaño; i++){
+                cout<<letras[i];
+            }
+            cout<<endl;
+
+            int repeteciones[26]= {0};
+
+            for (int i=0; i<tamaño; i++){
+                ++repeteciones[letras[i]-'A'];
+            }
+
+            for (int i=0; i<26; i++){
+                if (repeteciones[i]>0){
+                    cout<<static_cast<char>('A'+i)<<": "<<repeteciones[i]<<endl;
+                }
+            }
         }
         break;
         case 3:
