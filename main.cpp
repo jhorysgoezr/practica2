@@ -3,6 +3,8 @@
 
 using namespace std;
 
+bool compararpalabra(const char* pal1, const char* pal2);
+
 int main()
 {
     int opcion=1;
@@ -10,7 +12,7 @@ int main()
     cout<<"***Bienvednido a la practica 1***"<<endl;
     while (opcion!=0){
         cout<<"seleccione una opcion"<<endl;
-        cout<<"1) identificador vocal o consonante"<<endl;
+        cout<<"1) Contador de fectivo"<<endl;
         cout<<"2) Generador de letras"<<endl;
         cout<<"3) Comparador de cadenas de caracteres"<<endl;
         cout<<"4) Convertir cadena de caracteres a numeros"<<endl;
@@ -84,6 +86,14 @@ int main()
         break;
         case 3:
         {
+            const char* cadena1="hola";
+            const char* cadena2="hola";
+            if (compararpalabra(cadena1,cadena2)){
+                cout<<"las cadenas 1 y 2 son iguales."<<endl;
+            }
+            else {
+                cout<<"Las cadenas 1 y 2 son diferentes."<<endl;
+            }
 
         }
         break;
@@ -169,4 +179,11 @@ int main()
     }
     return 0;
     }
+}
+
+
+bool compararpalabra(const char* pal1, const char* pal2) {
+    for (; *pal1 && *pal2 && *pal1 == *pal2; pal1++, pal2++) {
+    }
+    return (*pal1 == '\0' && *pal2 == '\0');
 }
