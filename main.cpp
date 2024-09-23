@@ -5,7 +5,7 @@ using namespace std;
 
 bool compararpalabra(const char* pal1, const char* pal2);
 int cadenaAentero(char cadena[]);
-void enteroAcadena(int num,char*& arreglo);
+void enteroACadena(int num, char*& arreglo);
 
 int main()
 {
@@ -112,7 +112,7 @@ int main()
             int a = 13342;
             char* cad;
 
-            enteroAcadena(a, cad);
+            enteroACadena(a, cad);
 
             cout<<"el numero es: "<<cad<<endl;
 
@@ -209,22 +209,24 @@ int cadenaAentero(char cadena[]){
     return n;
 }
 
-void enteroAcadena(int num,char*& arreglo){
-    int tama = 0;
 
+
+void enteroACadena(int num, char*& arreglo) {
+    int tama = 1;
     int temp = num;
-    while (temp /= 10){
+
+    while (temp /= 10) {
         tama++;
     }
 
-    arreglo = new char [tama + 1];
-    int i = 0;
+    arreglo = new char[tama + 1];
 
-    do{
-        arreglo[i++] = num % 10 + '0';
+    int i = tama - 1;
+
+    do {
+        arreglo[i--] = num % 10 + '0';
         num /= 10;
-    }
-    while (num != 0);
-    arreglo[i] ='\0';
+    } while (num != 0);
 
+    arreglo[tama] = '\0';
 }
