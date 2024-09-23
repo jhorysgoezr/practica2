@@ -4,6 +4,8 @@
 using namespace std;
 
 bool compararpalabra(const char* pal1, const char* pal2);
+int cadenaAentero(char cadena[]);
+void enteroAcadena(int num,char*& arreglo);
 
 int main()
 {
@@ -99,12 +101,22 @@ int main()
         break;
         case 4:
         {
+            char cad[]= "123";
+            int a = cadenaAentero(cad);
+            cout<<"el numero es: "<<a<<endl;
 
         }
         break;
         case 5:
         {
+            int a = 13342;
+            char* cad;
 
+            enteroAcadena(a, cad);
+
+            cout<<"el numero es: "<<cad<<endl;
+
+            delete [] cad;
         }
         break;
         case 6:
@@ -186,4 +198,33 @@ bool compararpalabra(const char* pal1, const char* pal2) {
     for (; *pal1 && *pal2 && *pal1 == *pal2; pal1++, pal2++) {
     }
     return (*pal1 == '\0' && *pal2 == '\0');
+}
+
+int cadenaAentero(char cadena[]){
+    int i=0, n=0;
+    while (cadena[i] != '\0'){
+        n = 10*n + (cadena[i]- '0' );
+        i++;
+    }
+    return n;
+}
+
+void enteroAcadena(int num,char*& arreglo){
+    int tama = 0;
+
+    int temp = num;
+    while (temp /= 10){
+        tama++;
+    }
+
+    arreglo = new char [tama + 1];
+    int i = 0;
+
+    do{
+        arreglo[i++] = num % 10 + '0';
+        num /= 10;
+    }
+    while (num != 0);
+    arreglo[i] ='\0';
+
 }
