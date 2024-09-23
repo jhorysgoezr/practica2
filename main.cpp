@@ -6,6 +6,9 @@ using namespace std;
 bool compararpalabra(const char* pal1, const char* pal2);
 int cadenaAentero(char cadena[]);
 void enteroACadena(int num, char*& arreglo);
+void PasarAmayus (char cad[]);
+void eliminarPalabras (char* cadena);
+void separarNumeros(const char* cadena, char* texto, char* numeros);
 
 int main()
 {
@@ -121,17 +124,44 @@ int main()
         break;
         case 6:
         {
+            char cadena[]= "Man-zana";
+
+            cout<<"Original: " <<cadena<< ". ";
+            PasarAmayus(cadena);
+            cout<<"En mayuscula: "<<cadena<<endl;
+
 
         }
         break;
         case 7:
         {
+            char palabra[50];
+            cout<<"Ingresa una palabra: ";
+            cin>>palabra;
+            eliminarPalabras(palabra);
 
         }
         break;
         case 8:
         {
+            cout<<"ingrese una palabra: ";
+            char input[100];
+            cin>>input;
 
+            int longitud = 0;
+            while (input[longitud] != '\0' ){
+                ++longitud;
+            }
+            char* texto = new char [longitud + 1];
+            char* numeros = new char[longitud +1];
+
+            separarNumeros(input,texto,numeros);
+
+            cout<<"Original: "<<input<<endl;
+            cout<<"Texto: "<<texto<<" numero: "<<numeros<<endl;
+
+            delete[] texto;
+            delete[] numeros;
         }
         break;
         case 9:
@@ -229,4 +259,69 @@ void enteroACadena(int num, char*& arreglo) {
     } while (num != 0);
 
     arreglo[tama] = '\0';
+}
+
+void PasarAmayus (char cad[]){
+    int i = 0;
+    while (cad[i] != '\0' ){
+        if (cad[i]>= 'a' && cad[i] <= 'z'){
+            cad[i] = cad[i]-('a' -'A' );
+        }
+        i++;
+    }
+}
+
+void eliminarPalabras (char* cadena){
+    if (!cadena)
+        return;
+
+    int longitud = 0;
+    char* temp = cadena;
+    while (*temp){
+        ++longitud;
+        ++temp;
+    }
+
+    char* resultado = new char[longitud +1];
+    char* tempResultado = resultado;
+    char* ptr = cadena;
+
+    while (*ptr){
+        char* encontrado = resultado;
+        bool repetido = false;
+
+        while (*encontrado){
+            if (*encontrado == *ptr){
+                repetido = true;
+                break;
+            }
+            ++encontrado;
+        }
+        if (!repetido){
+            *tempResultado = *ptr;
+            ++tempResultado;
+        }
+        ++ptr;
+    }
+    *tempResultado = '\0';
+    cout<<"original: "<<cadena<<endl;
+    cout<<"sin repeticiones: "<<resultado<<endl;
+
+    delete[] resultado;
+}
+
+void separarNumeros(const char* cadena, char* texto, char* numeros){
+    while (*cadena){
+        if (*cadena >='0' && *cadena<= '9'){
+            *numeros = *cadena;
+            ++numeros;
+        }
+        else {
+            *texto = *cadena;
+            ++texto;
+        }
+        ++cadena;
+    }
+    *texto = '\0';
+    *numeros = '\0';
 }
