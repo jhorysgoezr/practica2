@@ -9,6 +9,9 @@ void enteroACadena(int num, char*& arreglo);
 void PasarAmayus (char cad[]);
 void eliminarPalabras (char* cadena);
 void separarNumeros(const char* cadena, char* texto, char* numeros);
+int romanocharAint(char c);
+int romanoAint(char roman[]);
+
 
 int main()
 {
@@ -212,6 +215,7 @@ int main()
         case 10:
         {
 
+
         }
         break;
         case 11:
@@ -364,4 +368,38 @@ void separarNumeros(const char* cadena, char* texto, char* numeros){
     }
     *texto = '\0';
     *numeros = '\0';
+}
+
+int romanocharAint(char c){
+    switch(c){
+    case 'I': return 1;
+    case 'V': return 5;
+    case 'X': return 10;
+    case 'L': return 50;
+    case 'C': return 100;
+    case 'D': return 500;
+    case 'M': return 1000;
+    default: return 0;
+    }
+}
+
+int romanoAint(char roman[]){
+    int resultado = 0;
+    int resultado_previo = 0;
+
+    int i = 0;
+    while (roman[i]){
+        int valor_actual = romanocharAint(roman[i]);
+
+        if (valor_actual > resultado_previo){
+            resultado += valor_actual -2 * resultado_previo;
+        }
+        else {
+            resultado += valor_actual;
+        }
+        resultado_previo = valor_actual;
+
+        i++;
+    }
+    return resultado;
 }
