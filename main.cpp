@@ -166,7 +166,47 @@ int main()
         break;
         case 9:
         {
+            int n;
+            cout<<"ingrese un numero n: ";
+            cin>>n;
 
+            char cadena[100];
+            cout<<"ingrese una cadena de caracteres numericos: ";
+            cin>>cadena;
+
+            cout<<"Original: "<<cadena<<endl;
+
+            int cadena_longitud = 0;
+            while (cadena[cadena_longitud] != '\0'){
+                cadena_longitud++;
+            }
+
+            while (cadena_longitud % n != 0 ){
+                for (int i = cadena_longitud; i>0; i--){
+                    cadena[i]= cadena[i-1];
+                }
+                cadena[0] = '0';
+                cadena_longitud++;
+            }
+
+            int suma = 0;
+            cout<<"Suma: ";
+            for (int i=0; i<cadena_longitud; i += n ){
+                char subcadena [10];
+                for (int j = 0; j<n; j++){
+                    subcadena[j] = cadena[i + j];
+                }
+                int numero = cadenaAentero(subcadena);
+                suma += numero;
+                if (numero == 0 && i>0 ){
+                    cout<<"0";
+                }
+                else
+                    cout<<numero;
+                if (i<cadena_longitud - n)
+                    cout<<"+";
+            }
+            cout<<" = "<<suma<<endl;
         }
         break;
         case 10:
