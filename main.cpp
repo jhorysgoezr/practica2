@@ -5,8 +5,8 @@ using namespace std;
 
 const int FILAS = 15;
 const int ASIENTO_FILA = 20;
-const int FILA_2 = 5;
-const int COLUMNA_2 = 5;
+const int fila = 5;
+const int columna = 5;
 int sala[FILAS][ASIENTO_FILA] = {0};
 bool compararpalabra(const char* pal1, const char* pal2);
 int cadenaAentero(char cadena[]);
@@ -20,7 +20,8 @@ void mostrarSala();
 void reservarAsiento(int fila, int asiento);
 void cancelarReserva(int fila, int asiento);
 bool esCuadradoMagico(int matriz[3][3]);
-
+void imprimirMatriz(int matriz[fila][columna]);
+void rotar90(int matriz[fila][columna], int rotada[fila][columna]);
 
 int main()
 {
@@ -312,7 +313,35 @@ int main()
         break;
         case 14:
         {
+            int matriz[fila][columna];
+            int contador = 1;
 
+            for (int i = 0; i < fila; ++i) {
+                for (int j = 0; j < columna; ++j) {
+                    matriz[i][j] = contador++;
+                }
+            }
+
+            cout << "Matriz Original:" << endl;
+            imprimirMatriz(matriz);
+            cout << endl;
+
+            int rotada90[fila][columna];
+            rotar90(matriz, rotada90);
+            cout << "Matriz rotada 90 grados: " << endl;
+            imprimirMatriz(rotada90);
+            cout << endl;
+
+            int rotada180[fila][columna];
+            rotar90(rotada90, rotada180);
+            cout << "Matriz rotada 180 :" << endl;
+            imprimirMatriz(rotada180);
+            cout << endl;
+
+            int rotada270[fila][columna];
+            rotar90(rotada180, rotada270);
+            cout << "Matriz rotada 270 grados :" << endl;
+            imprimirMatriz(rotada270);
         }
         break;
         case 15:
@@ -535,4 +564,21 @@ bool esCuadradoMagico(int matriz[3][3]) {
         return false;
     }
     return true;
+}
+
+void imprimirMatriz(int matriz[fila][columna]) {
+    for (int i = 0; i < fila; ++i) {
+        for (int j = 0; j < columna; ++j) {
+            cout << matriz[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void rotar90(int matriz[fila][columna], int rotada[fila][columna]) {
+    for (int i = 0; i < fila; ++i) {
+        for (int j = 0; j < columna; ++j) {
+            rotada[j][fila - i - 1] = matriz[i][j];
+        }
+    }
 }
