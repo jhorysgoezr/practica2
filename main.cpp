@@ -3,6 +3,11 @@
 
 using namespace std;
 
+const int FILAS = 15;
+const int ASIENTO_FILA = 20;
+const int FILA_2 = 5;
+const int COLUMNA_2 = 5;
+int sala[FILAS][ASIENTO_FILA] = {0};
 bool compararpalabra(const char* pal1, const char* pal2);
 int cadenaAentero(char cadena[]);
 void enteroACadena(int num, char*& arreglo);
@@ -11,6 +16,10 @@ void eliminarPalabras (char* cadena);
 void separarNumeros(const char* cadena, char* texto, char* numeros);
 int romanocharAint(char c);
 int romanoAint(char roman[]);
+void mostrarSala();
+void reservarAsiento(int fila, int asiento);
+void cancelarReserva(int fila, int asiento);
+bool esCuadradoMagico(int matriz[3][3]);
 
 
 int main()
@@ -214,18 +223,87 @@ int main()
         break;
         case 10:
         {
+            char numero_romano[20];
+            cout<<"Ingrese un numero en sistema romano: ";
+            cin>>numero_romano;
 
-
+            int numero_arabigo = romanoAint(numero_romano);
+            cout<<"El numero en sistema arabigo es: "<<numero_arabigo<<endl;
         }
         break;
         case 11:
         {
+            char opcion;
+            do {
+                cout << "1. Mostrar sala\n2. Reservar asiento\n3. Cancelar reserva\n4. Salir\n";
+                cout << "Seleccione una opcion: ";
+                cin >> opcion;
 
+                if (opcion == '1') {
+                    mostrarSala();
+                } else if (opcion == '2') {
+                    char fila;
+                    int asiento;
+                    cout << "Ingrese la fila (A-O): ";
+                    cin >> fila;
+                    cout << "Ingrese el numero de asiento (1-20): ";
+                    cin >> asiento;
+                    if (fila >= 'A' && fila <= 'O') {
+                        fila = fila - 'A' + 1;
+                        reservarAsiento(fila, asiento);
+                    } else if (fila >= 'a' && fila <= 'o') {
+                        fila = fila - 'a' + 1;
+                        reservarAsiento(fila, asiento);
+                    } else {
+                        cout << "Entrada invalida. Intente nuevamente." << endl;
+                    }
+                } else if (opcion == '3') {
+                    char fila;
+                    int asiento;
+                    cout << "Ingrese la fila (A-O): ";
+                    cin >> fila;
+                    cout << "Ingrese el numero de asiento (1-20): ";
+                    cin >> asiento;
+                    if (fila >= 'A' && fila <= 'O') {
+                        fila = fila - 'A' + 1;
+                        cancelarReserva(fila, asiento);
+                    } else if (fila >= 'a' && fila <= 'o') {
+                        fila = fila - 'a' + 1;
+                        cancelarReserva(fila, asiento);
+                    } else {
+                        cout << "Entrada invalida. Intente nuevamente." << endl;
+                    }
+                }
+            } while (opcion != '4');
+
+            return 0;
         }
         break;
         case 12:
         {
+            int matriz[3][3];
 
+            cout << "Ingrese los elementos de la matriz cuadrada 3x3:" << endl;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << "Elemento [" << i << "][" << j << "]: ";
+                    cin >> matriz[i][j];
+                }
+            }
+
+            cout << "\nLa matriz ingresada es:" << endl;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << matriz[i][j] << " ";
+                }
+                cout << endl;
+            }
+
+            if (esCuadradoMagico(matriz)) {
+                cout << "La matriz es un cuadrado magico." << endl;
+            } else {
+                cout << "La matriz no es un cuadrado magico." << endl;
+            }
         }
         break;
         case 13:
@@ -402,4 +480,59 @@ int romanoAint(char roman[]){
         i++;
     }
     return resultado;
+}
+
+void mostrarSala() {
+    for (int fila = 0; fila < FILAS; ++fila) {
+        cout << char('A' + fila) << " ";
+        for (int asiento = 0; asiento < ASIENTO_FILA; ++asiento) {
+            if (sala[fila][asiento] == 0) {
+                cout << "-";
+            } else {
+                cout << "*";
+            }
+        }
+        cout << endl;
+    }
+}
+
+void reservarAsiento(int fila, int asiento) {
+    if (fila >= 1 && fila <= FILAS && asiento >= 1 && asiento <= ASIENTO_FILA) {
+        if (sala[fila - 1][asiento - 1] == 0) {
+            sala[fila - 1][asiento - 1] = 1;
+            cout << "Asiento reservado correctamente." << endl;
+        } else {
+            cout << "El asiento ya esta reservado." << endl;
+        }
+    } else {
+        cout << "Fila o asiento invalido." << endl;
+    }
+}
+
+void cancelarReserva(int fila, int asiento) {
+    if (fila >= 1 && fila <= FILAS && asiento >= 1 && asiento <= ASIENTO_FILA) {
+        if (sala[fila - 1][asiento - 1] == 1) {
+            sala[fila - 1][asiento - 1] = 0;
+            cout << "Reserva cancelada correctamente." << endl;
+        } else {
+            cout << "El asiento no está reservado." << endl;
+        }
+    } else {
+        cout << "Fila o asiento invalido." << endl;
+    }
+}
+
+bool esCuadradoMagico(int matriz[3][3]) {
+    int suma = matriz[0][0] + matriz[0][1] + matriz[0][2];
+    for (int i = 0; i < 3; i++) {
+        if (matriz[i][0] + matriz[i][1] + matriz[i][2] != suma ||
+            matriz[0][i] + matriz[1][i] + matriz[2][i] != suma) {
+            return false;
+        }
+    }
+    if (matriz[0][0] + matriz[1][1] + matriz[2][2] != suma ||
+        matriz[0][2] + matriz[1][1] + matriz[2][0] != suma) {
+        return false;
+    }
+    return true;
 }
