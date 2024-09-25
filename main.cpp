@@ -22,6 +22,7 @@ void cancelarReserva(int fila, int asiento);
 bool esCuadradoMagico(int matriz[3][3]);
 void imprimirMatriz(int matriz[fila][columna]);
 void rotar90(int matriz[fila][columna], int rotada[fila][columna]);
+void calcularInterseccion(int* rectA, int* rectB, int* rectC);
 
 int main()
 {
@@ -346,7 +347,19 @@ int main()
         break;
         case 15:
         {
+            int rectA[4] = {0, 0, 8, 4};
+            int rectB[4] = {5, 2, 6, 7};
+            int rectC[4];
 
+            calcularInterseccion(rectA, rectB, rectC);
+
+            if (rectC[2] > 0 && rectC[3] > 0) {
+                cout << "El rectangulo de interseccion es: {"
+                     << rectC[0] << ", " << rectC[1] << ", "
+                     << rectC[2] << ", " << rectC[3] << "}" << endl;
+            } else {
+                cout << "Los rectangulos no se intersectan." << endl;
+            }
         }
         break;
         case 16:
@@ -580,5 +593,27 @@ void rotar90(int matriz[fila][columna], int rotada[fila][columna]) {
         for (int j = 0; j < columna; ++j) {
             rotada[j][fila - i - 1] = matriz[i][j];
         }
+    }
+}
+
+
+void calcularInterseccion(int* rectA, int* rectB, int* rectC) {
+
+    int x1 = rectA[0] > rectB[0] ? rectA[0] : rectB[0];
+    int y1 = rectA[1] > rectB[1] ? rectA[1] : rectB[1];
+    int x2 = (rectA[0] + rectA[2]) < (rectB[0] + rectB[2]) ? (rectA[0] + rectA[2]) : (rectB[0] + rectB[2]);
+    int y2 = (rectA[1] + rectA[3]) < (rectB[1] + rectB[3]) ? (rectA[1] + rectA[3]) : (rectB[1] + rectB[3]);
+
+    if (x1 < x2 && y1 < y2) {
+        rectC[0] = x1;
+        rectC[1] = y1;
+        rectC[2] = x2 - x1;
+        rectC[3] = y2 - y1;
+    }
+    else {
+        rectC[0] = 0;
+        rectC[1] = 0;
+        rectC[2] = 0;
+        rectC[3] = 0;
     }
 }
