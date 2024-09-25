@@ -23,6 +23,8 @@ bool esCuadradoMagico(int matriz[3][3]);
 void imprimirMatriz(int matriz[fila][columna]);
 void rotar90(int matriz[fila][columna], int rotada[fila][columna]);
 void calcularInterseccion(int* rectA, int* rectB, int* rectC);
+unsigned long long factorial(int num);
+unsigned long long combinaciones(int n, int k);
 
 int main()
 {
@@ -364,6 +366,15 @@ int main()
         break;
         case 16:
         {
+            int n;
+            cout << "Introduce el tamano de la cuadricula: ";
+            cin >> n;
+
+            int totalMovimientos = 2 * n;
+
+            unsigned long long caminos = combinaciones(totalMovimientos, n);
+
+            cout << "El numero de caminos posibles en una cuadricula de " << n << "x" << n << " es: " << caminos << endl;
 
         }
         break;
@@ -616,4 +627,16 @@ void calcularInterseccion(int* rectA, int* rectB, int* rectC) {
         rectC[2] = 0;
         rectC[3] = 0;
     }
+}
+
+unsigned long long factorial(int num) {
+    unsigned long long result = 1;
+    for (int i = 1; i <= num; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+unsigned long long combinaciones(int n, int k) {
+    return factorial(n) / (factorial(k) * factorial(n - k));
 }
