@@ -7,6 +7,8 @@ const int FILAS = 15;
 const int ASIENTO_FILA = 20;
 const int fila = 5;
 const int columna = 5;
+const int filas_1 = 6;  // Ajuste de filas
+const int columnas = 8;
 int sala[FILAS][ASIENTO_FILA] = {0};
 bool compararpalabra(const char* pal1, const char* pal2);
 int cadenaAentero(char cadena[]);
@@ -27,7 +29,7 @@ unsigned long long factorial(int num);
 unsigned long long combinaciones(int n, int k);
 int sumaDivisoresPropios(int n);
 void encontrarNPermutacion(int n);
-
+int contarEstrellas(int* matriz);
 
 int main()
 {
@@ -54,6 +56,7 @@ int main()
         cout<<"16) Calculador de caminos en una cuadricula"<<endl;
         cout<<"17) Numeros amigables"<<endl;
         cout<<"18) Permutaciones lexicograficas"<<endl;
+        cout<<"0)salir"<<endl;
         cin>>opcion;
         switch(opcion){
         case 1:
@@ -313,7 +316,18 @@ int main()
         break;
         case 13:
         {
+            int matriz[6][8] = {
+                {0, 3, 4, 0, 0, 0, 6, 8},
+                {5, 13, 6, 0, 0, 0, 2, 3},
+                {2, 6, 2, 7, 3, 0, 10, 0},
+                {0, 0, 4, 15, 4, 1, 6, 0},
+                {0, 0, 7, 12, 6, 9, 10, 4},
+                {5, 0, 6, 10, 6, 4, 8, 0}
+            };
 
+            int estrellas = contarEstrellas((int*)matriz);
+
+            cout << "Numero de estrellas encontradas: " << estrellas << endl;
         }
         break;
         case 14:
@@ -397,7 +411,7 @@ int main()
                 }
             }
 
-            cout << "La suma de todos los números amigables menores a " << limite << " es: " << sumaAmigables << endl;
+            cout << "La suma de todos los numeros amigables menores a " << limite << " es: " << sumaAmigables << endl;
         }
         break;
         case 18:
@@ -612,6 +626,8 @@ bool esCuadradoMagico(int matriz[3][3]) {
     return true;
 }
 
+
+
 void imprimirMatriz(int matriz[fila][columna]) {
     for (int i = 0; i < fila; ++i) {
         for (int j = 0; j < columna; ++j) {
@@ -708,6 +724,28 @@ void encontrarNPermutacion(int n) {
     }
 }
 
+int contarEstrellas(int* matriz) {
+    int numEstrellas = 0;
+
+    for (int i = 1; i < filas_1 - 1; ++i) {
+        for (int j = 1; j < columnas - 1; ++j) {
+            int a_ij = *((matriz + i * columnas) + j);
+            int a_ij1 = *((matriz + i * columnas) + (j + 1));
+            int a_ij_1 = *((matriz + i * columnas) + (j - 1));
+            int a_i1j = *((matriz + (i + 1) * columnas) + j);
+            int a_i_1j = *((matriz + (i - 1) * columnas) + j);
+
+
+            double promedio = (a_ij + a_ij1 + a_ij_1 + a_i1j + a_i_1j) / 5.0;
+
+            if (promedio >= 6) {
+                numEstrellas++;
+            }
+        }
+    }
+
+    return numEstrellas;
+}
 
 /* Problema 1 Arduino
 const int NUM_VALORES = 10;
