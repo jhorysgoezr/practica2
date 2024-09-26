@@ -148,8 +148,6 @@ int main()
             cout<<"Original: " <<cadena<< ". ";
             PasarAmayus(cadena);
             cout<<"En mayuscula: "<<cadena<<endl;
-
-
         }
         break;
         case 7:
@@ -769,6 +767,38 @@ void loop() {
 
     for (int i = 0; i < NUM_VALORES; i++) {
         cantidad[i] = 0;
+    }
+}
+*/
+
+
+
+/*Problema 6 arduino
+void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+    char cadena[] = "Man-zana";
+
+    Serial.print("Original: ");
+    Serial.println(cadena);
+
+    PasarAmayus(cadena);
+
+    Serial.print("En mayuscula: ");
+    Serial.println(cadena);
+
+    delay(1000);
+}
+
+void PasarAmayus(char cad[]) {
+    int i = 0;
+    while (cad[i] != '\0') {
+        if (cad[i] >= 'a' && cad[i] <= 'z') {
+            cad[i] = cad[i] - ('a' - 'A');
+        }
+        i++;
     }
 }
 */
