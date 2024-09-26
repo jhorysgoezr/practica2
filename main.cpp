@@ -25,6 +25,9 @@ void rotar90(int matriz[fila][columna], int rotada[fila][columna]);
 void calcularInterseccion(int* rectA, int* rectB, int* rectC);
 unsigned long long factorial(int num);
 unsigned long long combinaciones(int n, int k);
+int sumaDivisoresPropios(int n);
+void encontrarNPermutacion(int n);
+
 
 int main()
 {
@@ -380,11 +383,32 @@ int main()
         break;
         case 17:
         {
+            int limite;
+            cout << "Ingresa un número: ";
+            cin >> limite;
 
+            int sumaAmigables = 0;
+
+            for (int a = 2; a < limite; ++a) {
+                int b = sumaDivisoresPropios(a);
+                if (b > a && b < limite) {
+                    if (sumaDivisoresPropios(b) == a) {
+                        sumaAmigables += a + b;
+                    }
+                }
+            }
+
+            cout << "La suma de todos los números amigables menores a " << limite << " es: " << sumaAmigables << endl;
         }
         break;
         case 18:
         {
+            int numeroIngresado = 0;
+            cout << "Ingrese un numero: ";
+            cin >> numeroIngresado;
+
+            cout << "La permutacion numero " << numeroIngresado << " es: ";
+            encontrarNPermutacion(numeroIngresado);
 
         }
         break;
@@ -639,4 +663,49 @@ unsigned long long factorial(int num) {
 
 unsigned long long combinaciones(int n, int k) {
     return factorial(n) / (factorial(k) * factorial(n - k));
+}
+
+int sumaDivisoresPropios(int n) {
+    int suma = 1;
+    for (int i = 2; i <= n / 2; ++i) {
+        if (n % i == 0) {
+            suma += i;
+        }
+    }
+    return suma;
+}
+
+void encontrarNPermutacion(int n) {
+    const int tamano = 10;
+    int digitos[tamano];
+    bool utilizados[tamano] = {false};
+    int enesimo = n - 1;
+
+    for (int i = 0; i < tamano; ++i) {
+        digitos[i] = i;
+    }
+
+    for (int i = 1; i < tamano; ++i) {
+        int indice = enesimo / factorial(tamano - i);
+        enesimo = enesimo % factorial(tamano - i);
+
+        int j = 0;
+        while (true) {
+            if (!utilizados[j]) {
+                if (indice == 0) break;
+                indice--;
+            }
+            j++;
+        }
+
+        utilizados[j] = true;
+        cout << digitos[j];
+    }
+
+    for (int i = 0; i < tamano; ++i) {
+        if (!utilizados[i]) {
+            cout << digitos[i] << endl;
+            break;
+        }
+    }
 }
