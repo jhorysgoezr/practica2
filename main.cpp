@@ -709,3 +709,66 @@ void encontrarNPermutacion(int n) {
         }
     }
 }
+
+
+/* Problema 1 Arduino
+const int NUM_VALORES = 10;
+long valores[NUM_VALORES] = {50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50};
+int cantidad[NUM_VALORES] = {0};
+
+void setup() {
+    Serial.begin(9600);
+    while (!Serial) {
+        ;
+    }
+}
+
+void loop() {
+    Serial.println("Por favor ingrese una cantidad de dinero:");
+
+    while (!Serial.available()) {
+        ;
+    }
+
+    long cantidad_ing = Serial.parseInt();
+
+    if (cantidad_ing < 0) {
+        Serial.println("Por favor ingrese una cantidad positiva.");
+        return;
+    }
+
+    long cantidad_original = cantidad_ing;
+
+    for (int i = 0; i < NUM_VALORES; i++) {
+        if (cantidad_ing >= valores[i]) {
+            cantidad[i] = cantidad_ing / valores[i];
+            cantidad_ing %= valores[i];
+        } else {
+            cantidad[i] = 0;
+        }
+    }
+
+    Serial.print("Para la cantidad de ");
+    Serial.print(cantidad_original);
+    Serial.println(", se necesita:");
+
+    for (int i = 0; i < NUM_VALORES; i++) {
+        if (cantidad[i] > 0) {
+            Serial.print(cantidad[i]);
+            Serial.print(" x ");
+            Serial.println(valores[i]);
+        }
+    }
+
+    if (cantidad_ing > 0) {
+        Serial.print("Faltante: ");
+        Serial.println(cantidad_ing);
+    }
+
+    Serial.println();
+
+    for (int i = 0; i < NUM_VALORES; i++) {
+        cantidad[i] = 0;
+    }
+}
+*/
