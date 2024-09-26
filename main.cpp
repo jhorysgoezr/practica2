@@ -53,7 +53,7 @@ int main()
         cout<<"15) Interseccion entre rectangulos"<<endl;
         cout<<"16) Calculador de caminos en una cuadricula"<<endl;
         cout<<"17) Numeros amigables"<<endl;
-        cout<<"17) Permutaciones lexicograficas"<<endl;
+        cout<<"18) Permutaciones lexicograficas"<<endl;
         cin>>opcion;
         switch(opcion){
         case 1:
@@ -314,6 +314,7 @@ int main()
         case 13:
         {
 
+        }
         break;
         case 14:
         {
@@ -417,7 +418,6 @@ int main()
         }
     }
     return 0;
-    }
 }
 
 
@@ -800,5 +800,58 @@ void PasarAmayus(char cad[]) {
         }
         i++;
     }
+}
+*/
+
+/* problema 10 arduino
+void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+    char numero_romano[20] = "CLXXIV";
+
+    Serial.print("El numero ingresado fue: ");
+    Serial.println(numero_romano);
+
+    int numero_arabigo = romanoAint(numero_romano);
+
+    Serial.print("Que corresponde a: ");
+    Serial.println(numero_arabigo);
+
+    delay(5000);
+}
+
+int romanocharAint(char c) {
+    switch(c) {
+    case 'I': return 1;
+    case 'V': return 5;
+    case 'X': return 10;
+    case 'L': return 50;
+    case 'C': return 100;
+    case 'D': return 500;
+    case 'M': return 1000;
+    default: return 0;
+    }
+}
+
+int romanoAint(char roman[]) {
+    int resultado = 0;
+    int resultado_previo = 0;
+
+    int i = 0;
+    while (roman[i]) {
+        int valor_actual = romanocharAint(roman[i]);
+
+        if (valor_actual > resultado_previo) {
+            resultado += valor_actual - 2 * resultado_previo;
+        } else {
+            resultado += valor_actual;
+        }
+        resultado_previo = valor_actual;
+
+        i++;
+    }
+    return resultado;
 }
 */
