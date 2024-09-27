@@ -397,7 +397,7 @@ int main()
         case 17:
         {
             int limite;
-            cout << "Ingresa un número: ";
+            cout << "Ingresa un numero: ";
             cin >> limite;
 
             int sumaAmigables = 0;
@@ -891,5 +891,51 @@ int romanoAint(char roman[]) {
         i++;
     }
     return resultado;
+}
+*/
+
+/* Problema 17 arduino
+void setup() {
+    Serial.begin(9600);
+    while (!Serial) {
+        ; // Espera a que se establezca la conexión con el puerto serie
+    }
+
+    int limite;
+    Serial.println("Ingresa un numero: ");
+    while (Serial.available() == 0) {
+        ; // Espera a que el usuario ingrese un número
+    }
+    limite = Serial.parseInt();
+
+    int sumaAmigables = 0;
+
+    for (int a = 2; a < limite; ++a) {
+        int b = sumaDivisoresPropios(a);
+        if (b > a && b < limite) {
+            if (sumaDivisoresPropios(b) == a) {
+                sumaAmigables += a + b;
+            }
+        }
+    }
+
+    Serial.print("La suma de todos los numeros amigables menores a ");
+    Serial.print(limite);
+    Serial.print(" es: ");
+    Serial.println(sumaAmigables);
+}
+
+void loop() {
+    // No se necesita código en el loop para este ejemplo
+}
+
+int sumaDivisoresPropios(int n) {
+    int suma = 1;
+    for (int i = 2; i <= n / 2; ++i) {
+        if (n % i == 0) {
+            suma += i;
+        }
+    }
+    return suma;
 }
 */
